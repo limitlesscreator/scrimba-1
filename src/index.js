@@ -1,17 +1,52 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+
+// JSX stands for JavaScript XML
+
+function FirstAppComponent(){
+    // const h1 = document.createElement('h1')
+    // h1.innerHTML = 'test some text stuff'
+
+    const element = (
+        <>
+            <h1 className={'title'}> This is JSX</h1>
+            <p>This is paragraph</p>
+        </>
+    )
+    console.log(element)
+
+    //props: {className: 'title', children: ' This is JSX'}
+
+    const navBar = (
+        <nav>
+            <h2>website</h2>
+            <ul>
+                <li>Pricing</li>
+                <li>About</li>
+                <li>Contact</li>
+            </ul>
+        </nav>
+    )
+
+    // we have to return a single parent element
+    // example bellow : ul
+    return (
+        <>
+            {navBar}
+            <ul>
+                {element}
+                {/*<li>${h1}</li>*/}
+                <li>Thing 1</li>
+                <li>Thing 2</li>
+            </ul>
+        </>
+    )
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    <div>
+        <FirstAppComponent />
+    </div>,
+    document.getElementById("root")
+)
