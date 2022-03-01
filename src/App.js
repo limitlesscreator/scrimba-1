@@ -1,9 +1,16 @@
-import './App.css';
+import './style.css';
+
 
 import React from "react"
+import Navbar from "./components/Navbar"
+import Hero from "./components/Hero"
 
+// don't like export default is not good) will refactor soon
 export default function App() {
     return (
-        <h1>App component</h1>
+        <div>
+            <Navbar/>
+            <Hero/>
+        </div>
     )
 }
