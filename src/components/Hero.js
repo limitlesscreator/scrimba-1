@@ -1,7 +1,7 @@
 import React from "react"
 import img2 from '../images/photo-grid.png'
 
-export default function Hero() {
+export  function Hero() {
     return (
         <section className="hero">
             <img src={img2} className="hero--photo"/>
