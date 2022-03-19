@@ -1,31 +1,28 @@
+// https://coursehunter.net/course/tvorcheskiy-kurs-po-react-i-redux?lesson=1
 import './style.css';
-
-
-import React from "react"
-import {Navbar} from "./components/Navbar"
-import {Hero} from "./components/Hero"
-import {Card} from "./components/Card";
-import Contacts from "./components/Contacts";
-
+import {Tweet} from './components/Tweet'
+import {CreateTweet} from "./components/CreateTweet";
+import {TweetList} from "./components/TweetList";
+import {useState} from "react";
 
 export default function App() {
-    const firstName = 'Joe'
-    const lastName = 'Schmoe'
-    const time = new Date()
-    let timeOfDay = time.getHours() >= 13 ? 'afternoon' : 'night'
+    // ui is async with state, so when we change state, then ui will be change too
+    const [test, setTest] = useState('Hello React')
+    const [name, setName] = useState('Vladislav')
+
+    const message = 'I went to sleep today:)'
+
+    const sayHelloHandler = (e) => {
+        // console.log(`hello ${user}:)`)
+        console.log(e)
+        setTest('Hello Everyone')
+    }
     return (
         <div>
-            <Navbar/>
-            good {timeOfDay} {firstName} {lastName} !
-            <br/>
-            it is currently: {time.getHours() % 12} {time.getHours() >= 13 ? 'pm' : 'am'}
-            <Hero/>
-            <div className={'flexClass'}>
-                <Card cardNumber={1}/>
-                <Card cardNumber={2}/>
-            </div>
-            <div className={'title'}>Cats block :D</div>
-            <Contacts/>
+            <h1>{test}</h1>
+            <CreateTweet/>
+            <TweetList name={name} message={message}/>
+            <button onClick={sayHelloHandler}>Click</button>
         </div>
     )
 }
