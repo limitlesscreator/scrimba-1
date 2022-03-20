@@ -6,23 +6,33 @@ import {TweetList} from "./components/TweetList";
 import {useState} from "react";
 
 export default function App() {
-    // ui is async with state, so when we change state, then ui will be change too
+    const [textInput, setTextInput] = useState('')
+    const [tweets, setTweets] = useState(['christmas', 'summer'])
     const [test, setTest] = useState('Hello React')
     const [name, setName] = useState('Vladislav')
 
-    const message = 'I went to sleep today:)'
 
-    const sayHelloHandler = (e) => {
-        // console.log(`hello ${user}:)`)
-        console.log(e)
-        setTest('Hello Everyone')
+
+    const userInputHandler = (e) => {
+        setTextInput(e.target.value)
     }
+    const submitHandler = (e) => {
+        e.preventDefault()
+        setTweets([textInput,...tweets])
+        setTextInput('')
+    }
+
+
     return (
         <div>
             <h1>{test}</h1>
-            <CreateTweet/>
-            <TweetList name={name} message={message}/>
-            <button onClick={sayHelloHandler}>Click</button>
+            <CreateTweet
+                textInput={textInput}
+                userInputHandler={userInputHandler}
+                submitHandler={submitHandler}
+                setTextInput={setTextInput}/>
+
+            <TweetList name={name} tweets={tweets} setTweets={setTweets}/>
         </div>
     )
 }
