@@ -4,23 +4,25 @@ import {v4} from 'uuid';
 
 export const TweetList = ({name, tweets, setTweets}) => {
 
-    const filteredTweets = (deleteId) => {
-        console.log(deleteId)
-        console.log(tweets)
-        setTweets(tweets.filter((el) => deleteId !== el.id))
-    }
+
+    // const deleteTweets = (deleteId) => {
+    //     console.log(deleteId)
+    //     console.log(tweets)
+    //     setTweets(tweets.filter((el) => deleteId !== el.id))
+    // }
 
     return (
         <div className={'tweet-list'}>
-            {tweets.map((el,index) => {
-                const specialId = v4()
+            {tweets.map((el) => {
                 return (
                     <Tweet
-                        key={specialId}
+                        key={el.id}
                         name={name}
-                        tweets={el}
-                        id={specialId}
-                        filteredTweets={filteredTweets}/>
+                        tweet={el}
+                        tweets={tweets}
+                        setTweets={setTweets}
+                        // filteredTweets={filteredTweets}
+                    />
                 )
             })}
         </div>

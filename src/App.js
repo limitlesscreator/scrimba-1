@@ -1,16 +1,17 @@
-// https://coursehunter.net/course/tvorcheskiy-kurs-po-react-i-redux?lesson=1
-import './style.css';
-import {Tweet} from './components/Tweet'
 import {CreateTweet} from "./components/CreateTweet";
 import {TweetList} from "./components/TweetList";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import {v4} from 'uuid';
 
 export default function App() {
     const [textInput, setTextInput] = useState('')
-    const [tweets, setTweets] = useState(['christmas', 'summer'])
-    const [test, setTest] = useState('Hello React')
+    const [tweets, setTweets] = useState([])
+    const [test, setTest] = useState('Twitter')
     const [name, setName] = useState('Vladislav')
 
+    useEffect(() => {
+        console.log('hi')
+    },[textInput])
 
 
     const userInputHandler = (e) => {
@@ -18,13 +19,13 @@ export default function App() {
     }
     const submitHandler = (e) => {
         e.preventDefault()
-        setTweets([textInput,...tweets])
+        setTweets([{message: textInput, id: v4()},...tweets])
         setTextInput('')
     }
 
 
     return (
-        <div>
+        <div >
             <h1>{test}</h1>
             <CreateTweet
                 textInput={textInput}

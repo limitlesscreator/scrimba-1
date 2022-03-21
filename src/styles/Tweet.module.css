@@ -8,3 +8,13 @@ body {
     background-color: #22112f;
     color: aliceblue;
 }
+
+.title {
+    text-transform: uppercase;
+}
+
+.tweet {
+    border: solid 3px black;
+    background: #560000;
+    padding: 10px 5px;
+}

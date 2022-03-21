@@ -11,7 +11,9 @@ export const CreateTweet = ({textInput, userInputHandler, submitHandler, setText
                 value={textInput}
                 onChange={userInputHandler}
                 cols={50}
-                rows={5}>
+                rows={5}
+                style={{resize: "none"}}
+            >
             </textarea>
             <button onClick={submitHandler}>Submit</button>
             <h2 onClick={() => setTextInput('')}>{textInput}</h2>
