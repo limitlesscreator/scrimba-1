@@ -1,39 +1,14 @@
-import {CreateTweet} from "./components/CreateTweet";
-import {TweetList} from "./components/TweetList";
-import {useState, useEffect} from "react";
-import {v4} from 'uuid';
+import './styles/app.module.sass'
+import {Player} from "./components/Player";
+import {Song} from "./components/Song";
+// https://fontawesome.com/v5/docs/web/use-with/react
 
 export default function App() {
-    const [textInput, setTextInput] = useState('')
-    const [tweets, setTweets] = useState([])
-    const [test, setTest] = useState('Twitter')
-    const [name, setName] = useState('Vladislav')
-
-    useEffect(() => {
-        console.log('hi')
-    },[textInput])
-
-
-    const userInputHandler = (e) => {
-        setTextInput(e.target.value)
-    }
-    const submitHandler = (e) => {
-        e.preventDefault()
-        setTweets([{message: textInput, id: v4()},...tweets])
-        setTextInput('')
-    }
-
 
     return (
-        <div >
-            <h1>{test}</h1>
-            <CreateTweet
-                textInput={textInput}
-                userInputHandler={userInputHandler}
-                submitHandler={submitHandler}
-                setTextInput={setTextInput}/>
-
-            <TweetList name={name} tweets={tweets} setTweets={setTweets}/>
-        </div>
+        <h1>
+            <Song/>
+            <Player/>
+        </h1>
     )
 }
