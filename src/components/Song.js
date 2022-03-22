@@ -1,12 +1,12 @@
 import React from 'react';
 import s from '../styles/song.module.sass'
 
-export const Song = () => {
+export const Song = ({currentSong}) => {
     return (
         <div className={s.songContainer}>
-            <h2>Picture</h2>
-            <h2>Song Name</h2>
-            <h2>Artist</h2>
+            <img className={s.imgSong}  src={currentSong.cover} alt=""/>
+            <h2>{currentSong.name}</h2>
+            <h3>{currentSong.artist}</h3>
         </div>
     );
 };
