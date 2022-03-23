@@ -6,12 +6,17 @@ import {chillHop as data} from './util'
 import {useState} from "react";
 
 export default function App() {
+    const [isPlaying, setIsPlaying] = useState(false)
     const [songs, setSongs] = useState(data())
     const [currentSong, setCurrentSong] = useState(songs[0])
     return (
         <h1>
             <Song currentSong={currentSong}/>
-            <Player/>
+            <Player
+                currentSong={currentSong}
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+            />
         </h1>
     )
 }
