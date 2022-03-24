@@ -4,6 +4,7 @@ import {Song} from "./components/Song";
 // https://fontawesome.com/v5/docs/web/use-with/react
 import {chillHop as data} from './util'
 import {useState} from "react";
+import {Library} from "./components/Library";
 
 export default function App() {
     const [isPlaying, setIsPlaying] = useState(false)
@@ -17,6 +18,7 @@ export default function App() {
                 isPlaying={isPlaying}
                 setIsPlaying={setIsPlaying}
             />
+            <Library songs={songs}/>
         </h1>
     )
 }
