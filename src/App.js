@@ -4,7 +4,8 @@ import {Song} from "./components/Song";
 // https://fontawesome.com/v5/docs/web/use-with/react
 import {chillHop as data} from './util'
 import React, {useRef, useState} from "react";
-import {Library} from "./components/Library";
+import Library from "./components/Library";
+import {Nav} from "./components/Nav";
 
 export default function App() {
     const audioRef = useRef(null)
@@ -15,6 +16,7 @@ export default function App() {
         duration: 0,
         currentTime: 0,
     })
+    const [libraryStatus, setLibraryStatus] = useState(false)
     const timeUpdateHandler = (e) => {
         const currentTime = (e.target.currentTime)
         const duration = (e.target.duration)
@@ -24,22 +26,35 @@ export default function App() {
         audioRef.current.currentTime = e.target.value
     }
     return (
-        <h1>
-            <Song currentSong={currentSong}/>
+        <div>
+            <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus}/>
+            <Song
+                currentSong={currentSong}
+            />
             <Player
                 audioRef={audioRef}
                 isPlaying={isPlaying}
                 setIsPlaying={setIsPlaying}
                 songInfo={songInfo}
                 dragHandler={dragHandler}
+
             />
-            <Library songs={songs} setCurrentSong={setCurrentSong} setIsPlaying={setIsPlaying}  isPlaying={isPlaying} audioRef={audioRef}/>
+            <Library
+                libraryStatus={libraryStatus}
+                songs={songs}
+                     setCurrentSong={setCurrentSong}
+                     setIsPlaying={setIsPlaying}
+                     isPlaying={isPlaying}
+                     audioRef={audioRef}
+                     currentSong={currentSong}
+                     setSongs={setSongs}
+            />
             <audio
                 onTimeUpdate={timeUpdateHandler}
                 ref={audioRef}
                 src={currentSong.audio}
                 onLoadedMetadata={timeUpdateHandler}>
             </audio>
-        </h1>
+        </div>
     )
 }

@@ -28,7 +28,7 @@ export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler
                 <input
                     onChange={(e) => dragHandler(e)}
                     min={0}
-                    max={songInfo.duration}
+                    max={songInfo.duration || 0}
                     value={songInfo.currentTime ?? 0}
                     type="range"/>
                 <p>{getTime(songInfo.duration) === `NaN:aN` ? '0:00' : getTime(songInfo.duration)}</p>

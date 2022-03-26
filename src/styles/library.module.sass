@@ -11,7 +11,9 @@
   width: 20rem
   height: 100%
   overflow: scroll
-  overflow-x: hidden
+  transform: translateX(-100%)
+  transition: all 0.5s ease
+  opacity: 0
   h2
     color: whitesmoke
     text-align: center
@@ -53,6 +55,18 @@
     background: #665777
     cursor: pointer
 
+.selected
+  background: #776857
+  color: whitesmoke
+  display: flex
+  align-items: center
+  padding: 2rem
+  &:hover
+    background: #776857
+    cursor: pointer
+
+
+
 .songDescription
   padding-left: 1rem
 
@@ -69,3 +83,6 @@
   border: transparent
   scrollbar-width: thin
 
+.activeLibrary
+  transform: translateX(0%)
+  opacity: 1

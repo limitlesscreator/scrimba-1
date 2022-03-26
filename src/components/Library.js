@@ -1,16 +1,20 @@
-import React from 'react';
-import {LibrarySong} from "./LibrarySong";
+import React, {useState} from 'react';
 import s from '../styles/library.module.sass'
 import {v4} from "uuid";
+import LibrarySong from "./LibrarySong";
 
-export const Library = ({songs,setCurrentSong,setIsPlaying,audioRef,isPlaying}) => {
+const Library = ({songs, setCurrentSong, setIsPlaying,libraryStatus, audioRef, isPlaying, currentSong, setSongs}) => {
+
     return (
-        <div className={s.library}>
+        <div className={`${s.library} ${libraryStatus ? s.activeLibrary : ''}`}>
             <h2>Library</h2>
             <div className={s.librarySong}>
                 {songs.map((song) => {
+
+
                     return (
                         <LibrarySong
+                            setSongs={setSongs}
                             isPlaying={isPlaying}
                             audioRef={audioRef}
                             songs={songs}
@@ -18,6 +22,9 @@ export const Library = ({songs,setCurrentSong,setIsPlaying,audioRef,isPlaying}) 
                             song={song}
                             key={song.id}
                             setIsPlaying={setIsPlaying}
+                            currentSong={currentSong}
+                            active={song.active}
+                            id={song.id}
                         />
                     )
                 })}
@@ -26,3 +33,4 @@ export const Library = ({songs,setCurrentSong,setIsPlaying,audioRef,isPlaying}) 
     );
 };
 
+export default Library

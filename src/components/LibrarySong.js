@@ -1,14 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from "../styles/library.module.sass";
 
-export const LibrarySong = ({song, setCurrentSong , audioRef, isPlaying}) => {
+const LibrarySong = ({song, setCurrentSong, audioRef, isPlaying,id, currentSong,active , setSongs, songs}) => {
+
     const songSelectHandler = () => {
-        // const selectedSong = songs.filter(song => song.id === id)
+
         setCurrentSong(song)
 
-        if (isPlaying){
-           const promisePlay = audioRef.current.play()
-            if(promisePlay !== undefined){
+        const newSongs = songs.map((music) => {
+            if (music.id === id) {
+                return {
+                    ...music,
+                    active: true,
+                };
+            } else {
+                return {
+                    ...music,
+                    active: false,
+                };
+            }
+        });
+        setSongs(newSongs)
+
+        if (isPlaying) {
+            const promisePlay = audioRef.current.play()
+            if (promisePlay !== undefined) {
                 promisePlay.then(song => {
                     audioRef.current.play()
                 })
@@ -17,7 +33,7 @@ export const LibrarySong = ({song, setCurrentSong , audioRef, isPlaying}) => {
 
     }
     return (
-        <div className={s.librarySongs} onClick={songSelectHandler}>
+        <div className={` ${active ? s.selected :s.librarySongs }`} onClick={songSelectHandler}>
             <img src={song.cover} alt={song.name}/>
             <div className={s.songDescription}>
                 <h3>{song.name}</h3>
@@ -27,3 +43,4 @@ export const LibrarySong = ({song, setCurrentSong , audioRef, isPlaying}) => {
     );
 };
 
+export default LibrarySong

@@ -10,7 +10,7 @@ export function chillHop() {
             audio: "https://mp3.chillhop.com/serve.php/?mp3=28936",
             color: ["#0f1d36", "#cbcecd"],
             id: uuidv4(),
-            active: false,
+            active: true,
         },
         {
             name: "Beaver Creek",
