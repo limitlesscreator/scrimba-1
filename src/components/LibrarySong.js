@@ -1,4 +1,3 @@
-import React, {useEffect, useState} from 'react';
 import s from "../styles/library.module.sass";
 
 const LibrarySong = ({song, setCurrentSong, audioRef, isPlaying,id, currentSong,active , setSongs, songs}) => {
@@ -21,16 +20,14 @@ const LibrarySong = ({song, setCurrentSong, audioRef, isPlaying,id, currentSong,
             }
         });
         setSongs(newSongs)
-
         if (isPlaying) {
             const promisePlay = audioRef.current.play()
             if (promisePlay !== undefined) {
-                promisePlay.then(song => {
+                promisePlay.then(() => {
                     audioRef.current.play()
                 })
             }
         }
-
     }
     return (
         <div className={` ${active ? s.selected :s.librarySongs }`} onClick={songSelectHandler}>

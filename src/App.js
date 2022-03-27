@@ -1,7 +1,6 @@
 import './styles/app.module.sass'
 import {Player} from "./components/Player";
 import {Song} from "./components/Song";
-// https://fontawesome.com/v5/docs/web/use-with/react
 import {chillHop as data} from './util'
 import React, {useRef, useState} from "react";
 import Library from "./components/Library";

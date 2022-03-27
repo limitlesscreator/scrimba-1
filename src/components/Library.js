@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import s from '../styles/library.module.sass'
-import {v4} from "uuid";
 import LibrarySong from "./LibrarySong";
 
 const Library = ({songs, setCurrentSong, setIsPlaying,libraryStatus, audioRef, isPlaying, currentSong, setSongs}) => {
@@ -10,8 +9,6 @@ const Library = ({songs, setCurrentSong, setIsPlaying,libraryStatus, audioRef, i
             <h2>Library</h2>
             <div className={s.librarySong}>
                 {songs.map((song) => {
-
-
                     return (
                         <LibrarySong
                             setSongs={setSongs}

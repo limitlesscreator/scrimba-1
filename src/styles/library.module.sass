@@ -4,6 +4,7 @@
   font-family: 'Amatic SC', cursive
 
 .library
+  background: #433232
   position: fixed
   box-shadow: 2px 2px 50px #ffa9a9
   top: 0
@@ -14,31 +15,30 @@
   transform: translateX(-100%)
   transition: all 0.5s ease
   opacity: 0
+  overflow-x: hidden
+
   h2
     color: whitesmoke
     text-align: center
     margin-top: 20px
+    margin-bottom: 20px
 
 ::-webkit-scrollbar
   width: 6px
   border: transparent
 
 ::-webkit-scrollbar-track
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3)
   background: whitesmoke
 
 ::-webkit-scrollbar-thumb
   border-radius: 20px
   background-color: darkgrey
-  //outline: 1px solid slategrey
-
-
 
 .librarySong
   color: whitesmoke
   display: flex
   align-items: center
-  //padding: 1rem 2rem 1rem 2rem
   flex-direction: column
 
   img
@@ -61,10 +61,10 @@
   display: flex
   align-items: center
   padding: 2rem
+
   &:hover
     background: #776857
     cursor: pointer
-
 
 
 .songDescription
@@ -76,12 +76,6 @@
 
   h4
     font-size: 16px
-
-//*::-webkit-scrollbar-thumb
-  background: cornsilk
-  border-radius: 20px
-  border: transparent
-  scrollbar-width: thin
 
 .activeLibrary
   transform: translateX(0%)

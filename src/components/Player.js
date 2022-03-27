@@ -1,4 +1,3 @@
-import React, {useEffect, useRef, useState} from 'react';
 import s from '../styles/player.module.sass'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleLeft, faAngleRight, faPlay, faPause} from "@fortawesome/free-solid-svg-icons";
@@ -39,7 +38,6 @@ export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler
                                  icon={isPlaying ? faPause : faPlay}/>
                 <FontAwesomeIcon className={s.skipForward} color={'whitesmoke'} size={'2x'} icon={faAngleRight}/>
             </div>
-
         </div>
     );
 };
