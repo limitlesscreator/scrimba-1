@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import s from '../styles/library.module.sass'
 import LibrarySong from "./LibrarySong";
 
-const Library = ({songs, setCurrentSong, setIsPlaying,libraryStatus, audioRef, isPlaying, currentSong, setSongs}) => {
+const Library = ({songs, setCurrentSong, setIsPlaying, libraryStatus, audioRef, isPlaying, currentSong, setSongs}) => {
 
     return (
         <div className={`${s.library} ${libraryStatus ? s.activeLibrary : ''}`}>

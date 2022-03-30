@@ -2,7 +2,7 @@ import s from '../styles/player.module.sass'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleLeft, faAngleRight, faPlay, faPause} from "@fortawesome/free-solid-svg-icons";
 
-export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler}) => {
+export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler, songs, currentSong, setCurrentSong, setSongs}) => {
 
     const getTime = (time) => {
         return (
@@ -20,6 +20,34 @@ export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler
         }
     }
 
+    // const nextMusic = () => {
+    //     // const songJsonData = songs.map(el => JSON.stringify(el))
+    //     // const currentSongJSON = JSON.stringify(currentSong)
+    //     // console.log(songJsonData)
+    //     // console.log(currentSongJSON)
+    //     // console.log(songJsonData.indexOf(currentSongJSON))
+    //     // console.log(currentSong)
+    //     // console.log(songs)
+    //     //
+    //     // setCurrentSong
+    // }
+
+    const skipTrackHandler = (direction) => {
+        let currentIndex = songs.findIndex(song => song.id === currentSong.id)
+        console.log(currentIndex)
+        // setCurrentSong(songs[currentIndex + 1])
+        if (direction === 'skip-back') {
+            if ((currentIndex - 1) % songs.length === -1) {
+                setCurrentSong(songs[songs.length - 1]);
+                return;
+            }
+            setCurrentSong(songs[(currentIndex - 1) % songs.length])
+        } else if (direction === 'skip-forward') {
+
+            setCurrentSong(songs[(currentIndex + 1) % songs.length])
+        }
+    }
+
     return (
         <div className={s.player}>
             <div className={s.timeControl}>
@@ -33,10 +61,12 @@ export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler
                 <p>{getTime(songInfo.duration) === `NaN:aN` ? '0:00' : getTime(songInfo.duration)}</p>
             </div>
             <div className={s.playControl}>
-                <FontAwesomeIcon className={s.skipBack} size={'2x'} color={'whitesmoke'} icon={faAngleLeft}/>
+                <FontAwesomeIcon onClick={() => skipTrackHandler('skip-back')} className={s.skipBack} size={'2x'}
+                                 color={'whitesmoke'} icon={faAngleLeft}/>
                 <FontAwesomeIcon onClick={playSongHandler} className={s.play} color={'whitesmoke'} size={'2x'}
                                  icon={isPlaying ? faPause : faPlay}/>
-                <FontAwesomeIcon className={s.skipForward} color={'whitesmoke'} size={'2x'} icon={faAngleRight}/>
+                <FontAwesomeIcon onClick={() => skipTrackHandler('skip-forward')} className={s.skipForward}
+                                 color={'whitesmoke'} size={'2x'} icon={faAngleRight}/>
             </div>
         </div>
     );

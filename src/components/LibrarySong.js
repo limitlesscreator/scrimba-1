@@ -1,6 +1,6 @@
 import s from "../styles/library.module.sass";
 
-const LibrarySong = ({song, setCurrentSong, audioRef, isPlaying,id, currentSong,active , setSongs, songs}) => {
+const LibrarySong = ({song, setCurrentSong, audioRef, isPlaying, id, active, setSongs, songs}) => {
 
     const songSelectHandler = () => {
 
@@ -30,7 +30,7 @@ const LibrarySong = ({song, setCurrentSong, audioRef, isPlaying,id, currentSong,
         }
     }
     return (
-        <div className={` ${active ? s.selected :s.librarySongs }`} onClick={songSelectHandler}>
+        <div className={` ${active ? s.selected : s.librarySongs}`} onClick={songSelectHandler}>
             <img src={song.cover} alt={song.name}/>
             <div className={s.songDescription}>
                 <h3>{song.name}</h3>

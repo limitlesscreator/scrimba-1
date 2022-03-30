@@ -36,17 +36,20 @@ export default function App() {
                 setIsPlaying={setIsPlaying}
                 songInfo={songInfo}
                 dragHandler={dragHandler}
-
+                songs={songs}
+                currentSong={currentSong}
+                setCurrentSong={setCurrentSong}
+                setSongs={setSongs}
             />
             <Library
                 libraryStatus={libraryStatus}
                 songs={songs}
-                     setCurrentSong={setCurrentSong}
-                     setIsPlaying={setIsPlaying}
-                     isPlaying={isPlaying}
-                     audioRef={audioRef}
-                     currentSong={currentSong}
-                     setSongs={setSongs}
+                setCurrentSong={setCurrentSong}
+                setIsPlaying={setIsPlaying}
+                isPlaying={isPlaying}
+                audioRef={audioRef}
+                currentSong={currentSong}
+                setSongs={setSongs}
             />
             <audio
                 onTimeUpdate={timeUpdateHandler}
