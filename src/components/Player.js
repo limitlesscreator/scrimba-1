@@ -1,8 +1,28 @@
 import s from '../styles/player.module.sass'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleLeft, faAngleRight, faPlay, faPause} from "@fortawesome/free-solid-svg-icons";
+import {useEffect} from "react";
+import {playAudio} from "./util";
 
 export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler, songs, currentSong, setCurrentSong, setSongs}) => {
+
+    useEffect(() => {
+        const newSongs = songs.map((music) => {
+            if (music.id === currentSong.id) {
+                return {
+                    ...music,
+                    active: true,
+                };
+            } else {
+                return {
+                    ...music,
+                    active: false,
+                };
+            }
+        });
+        setSongs(newSongs)
+        playAudio(isPlaying, audioRef)
+    }, [currentSong])
 
     const getTime = (time) => {
         return (
@@ -20,21 +40,8 @@ export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler
         }
     }
 
-    // const nextMusic = () => {
-    //     // const songJsonData = songs.map(el => JSON.stringify(el))
-    //     // const currentSongJSON = JSON.stringify(currentSong)
-    //     // console.log(songJsonData)
-    //     // console.log(currentSongJSON)
-    //     // console.log(songJsonData.indexOf(currentSongJSON))
-    //     // console.log(currentSong)
-    //     // console.log(songs)
-    //     //
-    //     // setCurrentSong
-    // }
-
     const skipTrackHandler = (direction) => {
         let currentIndex = songs.findIndex(song => song.id === currentSong.id)
-        console.log(currentIndex)
         // setCurrentSong(songs[currentIndex + 1])
         if (direction === 'skip-back') {
             if ((currentIndex - 1) % songs.length === -1) {
@@ -43,22 +50,33 @@ export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler
             }
             setCurrentSong(songs[(currentIndex - 1) % songs.length])
         } else if (direction === 'skip-forward') {
-
             setCurrentSong(songs[(currentIndex + 1) % songs.length])
         }
+
+        // setCurrentSong(song)
+
+
+    }
+
+    const trackAnim = {
+        transform: `translateX(${songInfo.animationPercentage}%)`
     }
 
     return (
         <div className={s.player}>
             <div className={s.timeControl}>
                 <p>{getTime(songInfo.currentTime)}</p>
-                <input
-                    onChange={(e) => dragHandler(e)}
-                    min={0}
-                    max={songInfo.duration || 0}
-                    value={songInfo.currentTime ?? 0}
-                    type="range"/>
-                <p>{getTime(songInfo.duration) === `NaN:aN` ? '0:00' : getTime(songInfo.duration)}</p>
+                <div className={s.track}>
+                    <input
+                        style={{background: `linear-gradient(to right, ${currentSong.color[0]},${currentSong.color[1]})`}}
+                        onChange={(e) => dragHandler(e)}
+                        min={0}
+                        max={songInfo.duration || 0}
+                        value={songInfo.currentTime ?? 0}
+                        type="range"/>
+                    <div style={trackAnim} className={s.animateTrack}></div>
+                </div>
+                <p>{songInfo.duration ? getTime(songInfo.duration) : '0:00'}</p>
             </div>
             <div className={s.playControl}>
                 <FontAwesomeIcon onClick={() => skipTrackHandler('skip-back')} className={s.skipBack} size={'2x'}

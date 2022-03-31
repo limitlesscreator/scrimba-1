@@ -1,7 +1,7 @@
 import './styles/app.module.sass'
 import {Player} from "./components/Player";
 import {Song} from "./components/Song";
-import {chillHop as data} from './util'
+import {chillHop as data} from './data'
 import React, {useRef, useState} from "react";
 import Library from "./components/Library";
 import {Nav} from "./components/Nav";
@@ -14,12 +14,18 @@ export default function App() {
     const [songInfo, setSongInfo] = useState({
         duration: 0,
         currentTime: 0,
+        animationPercentage: 0
     })
     const [libraryStatus, setLibraryStatus] = useState(false)
+
     const timeUpdateHandler = (e) => {
         const currentTime = (e.target.currentTime)
         const duration = (e.target.duration)
-        setSongInfo({currentTime, duration})
+        const roundedCurrent = Math.round(currentTime)
+        const roundedDuration = Math.round(duration)
+        const animationPercentage = Math.round((roundedCurrent / roundedDuration ) * 100)
+        setSongInfo({...songInfo, currentTime: currentTime, duration: duration, animationPercentage: animationPercentage})
+        console.log(animationPercentage)
     }
     const dragHandler = (e) => {
         audioRef.current.currentTime = e.target.value
