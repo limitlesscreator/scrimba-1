@@ -4,7 +4,7 @@ import {faAngleLeft, faAngleRight, faPlay, faPause} from "@fortawesome/free-soli
 import {useEffect} from "react";
 import {playAudio} from "./util";
 
-export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler, songs, currentSong, setCurrentSong, setSongs}) => {
+export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler, songs, currentSong, setCurrentSong, setSongs, skipTrackHandler}) => {
 
     useEffect(() => {
         const newSongs = songs.map((music) => {
@@ -40,23 +40,6 @@ export const Player = ({isPlaying, setIsPlaying, audioRef, songInfo, dragHandler
         }
     }
 
-    const skipTrackHandler = (direction) => {
-        let currentIndex = songs.findIndex(song => song.id === currentSong.id)
-        // setCurrentSong(songs[currentIndex + 1])
-        if (direction === 'skip-back') {
-            if ((currentIndex - 1) % songs.length === -1) {
-                setCurrentSong(songs[songs.length - 1]);
-                return;
-            }
-            setCurrentSong(songs[(currentIndex - 1) % songs.length])
-        } else if (direction === 'skip-forward') {
-            setCurrentSong(songs[(currentIndex + 1) % songs.length])
-        }
-
-        // setCurrentSong(song)
-
-
-    }
 
     const trackAnim = {
         transform: `translateX(${songInfo.animationPercentage}%)`

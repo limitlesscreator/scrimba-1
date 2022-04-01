@@ -72,5 +72,15 @@ export function chillHop() {
             id: uuidv4(),
             active: false,
         },
+        {
+            name: "Night Fishing",
+            cover:
+                "https://chillhop.com/wp-content/uploads/2022/03/1a32362ec1ba749448678975a905ae2b66caf80f-1024x1024.jpg",
+            artist: "C Y G N",
+            audio: "https://mp3.chillhop.com/serve.php/?mp3=31591",
+            color: ["#699690", "#71b04b"],
+            id: uuidv4(),
+            active: false,
+        },
     ];
 }

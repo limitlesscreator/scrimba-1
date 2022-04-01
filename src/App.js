@@ -1,4 +1,4 @@
-import './styles/app.module.sass'
+import './styles/app.sass'
 import {Player} from "./components/Player";
 import {Song} from "./components/Song";
 import {chillHop as data} from './data'
@@ -18,6 +18,30 @@ export default function App() {
     })
     const [libraryStatus, setLibraryStatus] = useState(false)
 
+    const skipTrackHandler = (direction) => {
+        let currentIndex = songs.findIndex(song => song.id === currentSong.id)
+        if (direction === 'skip-back') {
+            if ((currentIndex - 1) % songs.length === -1) {
+                setSongInfo({
+                    duration: 0,
+                    currentTime: 0,
+                    animationPercentage: 0
+                })
+                setCurrentSong(songs[songs.length - 1]);
+                return;
+            }
+
+            setCurrentSong(songs[(currentIndex - 1) % songs.length])
+        } else if (direction === 'skip-forward') {
+            setSongInfo({
+                duration: 0,
+                currentTime: 0,
+                animationPercentage: 0
+            })
+            setCurrentSong(songs[(currentIndex + 1) % songs.length])
+        }
+    }
+
     const timeUpdateHandler = (e) => {
         const currentTime = (e.target.currentTime)
         const duration = (e.target.duration)
@@ -25,13 +49,14 @@ export default function App() {
         const roundedDuration = Math.round(duration)
         const animationPercentage = Math.round((roundedCurrent / roundedDuration ) * 100)
         setSongInfo({...songInfo, currentTime: currentTime, duration: duration, animationPercentage: animationPercentage})
+
         console.log(animationPercentage)
     }
     const dragHandler = (e) => {
         audioRef.current.currentTime = e.target.value
     }
     return (
-        <div>
+        <div className={`App ${libraryStatus ? 'libraryActive' : ``} `}>
             <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus}/>
             <Song
                 currentSong={currentSong}
@@ -46,6 +71,7 @@ export default function App() {
                 currentSong={currentSong}
                 setCurrentSong={setCurrentSong}
                 setSongs={setSongs}
+                skipTrackHandler={skipTrackHandler}
             />
             <Library
                 libraryStatus={libraryStatus}
@@ -61,7 +87,9 @@ export default function App() {
                 onTimeUpdate={timeUpdateHandler}
                 ref={audioRef}
                 src={currentSong.audio}
-                onLoadedMetadata={timeUpdateHandler}>
+                onLoadedMetadata={timeUpdateHandler}
+                onEnded={() => skipTrackHandler('skip-forward')}
+            >
             </audio>
         </div>
     )
